@@ -11,8 +11,12 @@ img{
   margin-top: 25px;
 }
 .icon-person{
-  /* margin-top: 5px; */
+  margin-top:-2px
 }
+input::placeholder{
+  text-align: center;
+}
+
 body{
   background-color: hsl(185, 41%, 84%);
   align-items: center;
@@ -101,10 +105,10 @@ button{
   background-color: hsl(172, 67%, 45%);
 }
 
-/* button:hover{
+button:hover{
   color: hsl(183, 100%, 15%) ;
   background-color: hsl(172, 67%, 45%);
-} */
+}
 
 .buttons{
     display: grid;
@@ -116,7 +120,7 @@ button{
 }
 
 .custom{
-  /* width: 80px; */
+  width: 95px;
   height: 30px;
   font-size: 15px;
   margin-left: 5px;
@@ -175,16 +179,19 @@ h5{
 }
 .notZero{
   font-weight: 400;
-  font-size: 15px;
+  font-size: 12px;
   color: red;
   visibility: hidden;
+  margin-left: 10px;
+  letter-spacing: -1px;
 }
 .zero{
   font-weight: 400;
   font-size: 12px;
   color: red;
   visibility: visible;
-  margin-left: 55px;
+  margin-left: 10px;
+  letter-spacing: -1px;
 }
 
 @media (max-width:769px) {

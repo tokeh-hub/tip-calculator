@@ -26,7 +26,8 @@ function App() {
           console.log(tot)
           setTotal(tot.toFixed(2))
         }
-        else if(bill ==='0' || number ==='0' || bill==='' || number===''){
+        else if(bill<0){alert('Bills cant be negative') ; setTotal('0.00')}
+        else if(bill <= 0 || number <= 0 || bill==='' || number===''){
           setTotal('0.00')
         }
         else{
@@ -35,7 +36,7 @@ function App() {
     )
 
     const tipFunction = (id) =>{
-         buttons.map(button=>{
+         buttons.map((button,index)=>{
            if(button.id === id){
             const percentageOfBill = (button.value/100)*bill 
             const tipPerPerson = (percentageOfBill /number).toFixed(2)
@@ -75,7 +76,8 @@ function App() {
                      return(
                        <button key={id} onClick={()=>{
                          setActiveButton(index)
-                        tipFunction(id)
+                         tipFunction(id);
+                         
                         }
                        } 
                         className={`bg ${activeButton === index ? 'bg-2' : null}`} >{value}%</button>
@@ -85,7 +87,7 @@ function App() {
               </div>
          </div>
          <div className='number' >
-           <p className='text number-of-people'>Number of People<span className={number==='0'?'zero':'notZero'}>Number Cant be zero</span></p>
+           <p className='text number-of-people'>Number of People<span className={number<=0?'zero':'notZero'}>Number Cant be zero or less</span></p>
            <div className='form-container2'>
              <GoPerson className='icon icon-person'/>
            <input type='number'className='number-input input-width' min='0'  value={number} onChange={e=>setNumber(e.target.value)} ></input>
