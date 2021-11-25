@@ -17,7 +17,8 @@ function App() {
       const [activeButton, setActiveButton] = useState(0)
     useEffect(
       () => {
-        let a = (bill / number).toFixed(2);
+      
+        
         if(custom){
           const percentageOfBill = (custom/100)*bill 
           const tipPerPerson = (percentageOfBill /number).toFixed(2)
@@ -27,15 +28,17 @@ function App() {
           setTotal(tot.toFixed(2))
         }
         else if(bill<0){alert('Bills cant be negative') ; setTotal('0.00')}
+        
         else if(bill <= 0 || number <= 0 || bill==='' || number===''){
           setTotal('0.00')
         }
         else{
-        setTotal(a)}
+        setTotal((bill / number).toFixed(2))}
       },[bill,number,custom]
     )
 
     const tipFunction = (id) =>{
+      if(number <= 0 || bill <= 0){return;}
          buttons.map((button,index)=>{
            if(button.id === id){
             const percentageOfBill = (button.value/100)*bill 
@@ -77,7 +80,7 @@ function App() {
                        <button key={id} onClick={()=>{
                          setActiveButton(index)
                          tipFunction(id);
-                         
+
                         }
                        } 
                         className={`bg ${activeButton === index ? 'bg-2' : null}`} >{value}%</button>
