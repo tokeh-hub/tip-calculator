@@ -295,7 +295,7 @@ h5{
  
 }
 
-@media (max-width:370px) {
+@media (max-width:376px) {
   .container{
     width:320px;
     height: auto;
@@ -356,6 +356,10 @@ h5{
   margin-top: -10px;
   padding: 0;
   gap: 5px;
+}
+.custom{
+  width: 85px;
+  
 }
 .zero{
   font-weight: 400;
