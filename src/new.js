@@ -6,15 +6,22 @@ import { GoPerson } from "react-icons/go"
 import './App.css';
 import buttons from './buttons'
 
-
+const zero = 0;
+const i = zero.toFixed(2).toString()
 
 function App() {
       const[bill,setBill] = useState('')
       const[number,setNumber] = useState('')
-      const[tip,setTip] = useState('0.00')
+      const[tip,setTip] = useState(i)
       const [custom,setCustom] = useState('')
-      const[total,setTotal] = useState('0.00')
+      const[mytotal,setMyTotal] = useState(i)
       const [activeButton, setActiveButton] = useState(0)
+      // const[color,setColor] = useState(false)
+      console.log(mytotal)
+
+      // useEffect(()=>{
+      //   setMyTotal(0.00)
+      // },[])
     useEffect(
       () => {
         let a = (bill / number).toFixed(2);
@@ -24,27 +31,27 @@ function App() {
           setTip(tipPerPerson);
           const tot = parseFloat(tipPerPerson) + parseFloat(bill/number)
           console.log(tot)
-          setTotal(tot.toFixed(2))
+          setMyTotal(tot.toFixed(2))
         }
-        else if(bill ==='0' || number ==='0' || bill==='' || number===''){
-          setTotal('0.00')
+        else if(bill <='0' || number<='0' || bill==='' || number===''){
+          setMyTotal(0.00)
         }
         else{
-        setTotal(a)}
+        setMyTotal(a)}
       },[bill,number,custom]
     )
 
     const tipFunction = (id) =>{
          buttons.map(button=>{
+           
            if(button.id === id){
             const percentageOfBill = (button.value/100)*bill 
             const tipPerPerson = (percentageOfBill /number).toFixed(2)
             setTip(tipPerPerson);
             const tot = parseFloat(tipPerPerson) + parseFloat(bill/number)
             console.log(tot)
-            setTotal(tot.toFixed(2))
+            setMyTotal(tot.toFixed(2))
            }
-           return button;
          })    
     }
   
@@ -52,7 +59,7 @@ function App() {
       setBill('');
       setNumber('');
       setTip('0.00')
-      setTotal('0.00')
+      setMyTotal('0.00')
     }
       
   return (
@@ -102,10 +109,10 @@ function App() {
          </div>
          <div className='total'>
            <div>
-            <h5>Total</h5>
+            <h5>Total Amount</h5>
             <p className='text'>/ person</p>
            </div>
-           <h2>${total}</h2>
+           <h2>${mytotal}</h2>
          </div>
          <button className='reset' onClick={resetBills}>Reset</button>
         </section>
