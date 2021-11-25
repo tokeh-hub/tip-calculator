@@ -26,7 +26,7 @@ function App() {
           console.log(tot)
           setTotal(tot.toFixed(2))
         }
-        if(bill < 0 || number < 0){alert('Please Enter positive bills and numbers only');setTip('0.00');setTotal('0.00')}
+        if(bill < 0 || number < 0){return;}
         if(bill === '' || number==='' || number===0 || bill===0){setTip('0.00');setTotal('0.00')}
         else{
         setTotal((bill / number).toFixed(2))}
