@@ -46,6 +46,7 @@ input{
   border: none;
   text-align: right;
   border-radius: 5px;
+  
 }
 .input-width{
   width: 90%;
@@ -129,7 +130,7 @@ button:hover{
   height: 35px;
   font-size: 15px;
   margin-left: 5px;
-  margin-top: 5px;
+  margin-top: 2px;
   border: none;
   outline: none;
   background-color: hsl(185, 41%, 84%);
