@@ -17,9 +17,10 @@ function App() {
       const [activeButton, setActiveButton] = useState(0)
     useEffect(
       () => {
-      
+         
         
-        if(custom){
+        if(custom && bill && number){
+          setActiveButton(null)
           const percentageOfBill = (custom/100)*bill 
           const tipPerPerson = (percentageOfBill /number).toFixed(2)
           setTip(tipPerPerson);
@@ -27,7 +28,7 @@ function App() {
           console.log(tot)
           setTotal(tot.toFixed(2))
         }
-        else if(bill<0){alert('Bills cant be negative') ; setTotal('0.00')}
+        else if(bill<0 || number<0){alert('Bills or numbers cant be negative') ; return;}
         
         else if(bill <= 0 || number <= 0 || bill==='' || number===''){
           setTotal('0.00')
@@ -36,11 +37,27 @@ function App() {
         setTotal((bill / number).toFixed(2))}
       },[bill,number,custom]
     )
-
+   useEffect(()=>{
+     if(bill && number){
+     buttons.map((button,index)=>{
+       if(activeButton===index){
+         console.log(button)
+        const percentageOfBill = (button.value/100)*bill
+        console.log(bill) 
+        console.log(percentageOfBill)
+        const tipPerPerson = (percentageOfBill /number).toFixed(2)
+        setTip(tipPerPerson);
+        const tot = parseFloat(tipPerPerson) + parseFloat(bill/number)
+        console.log(tot)
+        setTotal(tot.toFixed(2))
+       }
+       return button;
+     })}
+   },[bill,number,activeButton])
     const tipFunction = (id) =>{
       if(number <= 0 || bill <= 0){return;}
          buttons.map((button,index)=>{
-           if(button.id === id){
+           if(button.id === id ){
             const percentageOfBill = (button.value/100)*bill 
             const tipPerPerson = (percentageOfBill /number).toFixed(2)
             setTip(tipPerPerson);
@@ -90,7 +107,7 @@ function App() {
               </div>
          </div>
          <div className='number' >
-           <p className='text number-of-people'>Number of People<span className={number<=0?'zero':'notZero'}>Number Cant be zero or less</span></p>
+           <p className='text number-of-people'>Number of People<span className={number==='0'?'zero':'notZero'}>Number Cant be zero or less</span></p>
            <div className='form-container2'>
              <GoPerson className='icon icon-person'/>
            <input type='number'className='number-input input-width' min='0'  value={number} onChange={e=>setNumber(e.target.value)} ></input>
