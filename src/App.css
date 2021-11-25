@@ -126,7 +126,7 @@ button:hover{
 
 .custom{
   width: 95px;
-  height: 30px;
+  height: 35px;
   font-size: 15px;
   margin-left: 5px;
   margin-top: 5px;
@@ -134,6 +134,7 @@ button:hover{
   outline: none;
   background-color: hsl(185, 41%, 84%);
   border-radius: 5px;
+  padding: 10px;
 }
 .bill{
   margin-bottom: 20px;
@@ -196,7 +197,7 @@ h5{
   font-size: 12px;
   color: red;
   visibility: visible;
-  margin-left: 10px;
+  margin-left: 70px;
   letter-spacing: -1px;
 }
 
@@ -288,14 +289,9 @@ h5{
     color: hsl(185, 41%, 84%);
  }
  .icon-person{
-   margin-top: 10px;
+   margin-top: 2px;
  }
- .number-of-people{
-  margin-bottom: -10px;
-}
-.number-input{
-  margin-top: -10px;
-}
+ 
 }
 
 @media (max-width:370px) {

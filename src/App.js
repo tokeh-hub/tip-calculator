@@ -17,8 +17,6 @@ function App() {
       const [activeButton, setActiveButton] = useState(0)
     useEffect(
       () => {
-         
-        
         if(custom && bill && number){
           setActiveButton(null)
           const percentageOfBill = (custom/100)*bill 
@@ -28,17 +26,15 @@ function App() {
           console.log(tot)
           setTotal(tot.toFixed(2))
         }
-        else if(bill<0 || number<0){alert('Bills or numbers cant be negative') ; return;}
+        if(bill<=0 || number<=0){setTip('0.00');setTotal('0.00')}
         
-        else if(bill <= 0 || number <= 0 || bill==='' || number===''){
-          setTotal('0.00')
-        }
         else{
         setTotal((bill / number).toFixed(2))}
       },[bill,number,custom]
     )
    useEffect(()=>{
-     if(bill && number){
+    //  if(bill<=0 || number<=0){setTip('0.00');setTotal('0.00')}
+     if(bill && number && bill > 0 && number>0){
      buttons.map((button,index)=>{
        if(activeButton===index){
          console.log(button)
@@ -51,12 +47,12 @@ function App() {
         console.log(tot)
         setTotal(tot.toFixed(2))
        }
-       return button;
+       return button 
      })}
    },[bill,number,activeButton])
     const tipFunction = (id) =>{
       if(number <= 0 || bill <= 0){return;}
-         buttons.map((button,index)=>{
+         buttons.map((button)=>{
            if(button.id === id ){
             const percentageOfBill = (button.value/100)*bill 
             const tipPerPerson = (percentageOfBill /number).toFixed(2)
@@ -107,7 +103,7 @@ function App() {
               </div>
          </div>
          <div className='number' >
-           <p className='text number-of-people'>Number of People<span className={number==='0'?'zero':'notZero'}>Number Cant be zero or less</span></p>
+           <p className='text number-of-people'>Number of People<span className={number==='0'?'zero':'notZero'}>Cant be zero</span></p>
            <div className='form-container2'>
              <GoPerson className='icon icon-person'/>
            <input type='number'className='number-input input-width' min='0'  value={number} onChange={e=>setNumber(e.target.value)} ></input>
