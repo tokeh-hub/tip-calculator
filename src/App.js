@@ -1,20 +1,21 @@
 import{useState,useEffect} from 'react'
 import React from 'react';
-import logo from './logo.svg'
+import logo from './assets/logo.svg'
 import { BsCurrencyDollar } from "react-icons/bs";
 import { GoPerson } from "react-icons/go"
 import './App.css';
 import buttons from './buttons'
 
-
-
 function App() {
+     //Declare state values of different variables
       const[bill,setBill] = useState('')
       const[number,setNumber] = useState('')
       const[tip,setTip] = useState('0.00')
       const [custom,setCustom] = useState('')
       const[total,setTotal] = useState('0.00')
       const [activeButton, setActiveButton] = useState(0)
+   
+      //  Calculate and update total and tip amounts as bills,number and custom value changes
     useEffect(
       () => {
         if(custom && bill && number){
@@ -32,24 +33,25 @@ function App() {
         setTotal((bill / number).toFixed(2))}
       },[bill,number,custom]
     )
+
+    // Calculate and update total and tip amounts as bills,number and activeButton changes
+  
    useEffect(()=>{
-    //  if(bill<=0 || number<=0){setTip('0.00');setTotal('0.00')}
      if(bill && number && bill > 0 && number>0){
      buttons.map((button,index)=>{
        if(activeButton===index){
-         console.log(button)
         const percentageOfBill = (button.value/100)*bill
-        console.log(bill) 
-        console.log(percentageOfBill)
         const tipPerPerson = (percentageOfBill /number).toFixed(2)
-        setTip(tipPerPerson);
         const tot = parseFloat(tipPerPerson) + parseFloat(bill/number)
-        console.log(tot)
+        setTip(tipPerPerson);
         setTotal(tot.toFixed(2))
        }
        return button 
      })}
    },[bill,number,activeButton])
+
+  //  tipFunction
+
     const tipFunction = (id) =>{
       if(number <= 0 || bill <= 0){return;}
          buttons.map((button)=>{
@@ -58,13 +60,14 @@ function App() {
             const tipPerPerson = (percentageOfBill /number).toFixed(2)
             setTip(tipPerPerson);
             const tot = parseFloat(tipPerPerson) + parseFloat(bill/number)
-            console.log(tot)
             setTotal(tot.toFixed(2))
            }
            return button;
          })    
     }
   
+    // reset to default
+    
     const resetBills = ()=>{
       setBill('');
       setNumber('');
@@ -77,12 +80,22 @@ function App() {
     <img src={logo} alt='logo'></img>
     <div className='container'>
         <section className='first'>
-         <div className='bill'>
-             <p className='text'>Bill</p>
-             <div className='form-container'>
-               <BsCurrencyDollar className='icon icon-dollar'/>
-             <input type='text'  value={bill} onChange={e=>setBill(e.target.value)} className='input-width'></input>
-             </div>
+            <div className='bill'>
+                <p className='text'>Bill</p>
+                <div className='form-container'>
+                    <BsCurrencyDollar className='icon icon-dollar'/>
+                    <input type='text' 
+                       value={bill} 
+                       onChange={e=>{
+                       //  regex that matches only numbers
+                       const re = /^[0-9\b]+$/;
+                       //  check if input value is either empty or matches the regex:
+                       if(re.test(e.target.value) || e.target.value === '')
+                       {setBill(e.target.value)}
+                       }} 
+                       className='input-width'>
+                    </input>
+                </div>
          </div>
          <div >
              <p className='text'>Select Tip %</p>
